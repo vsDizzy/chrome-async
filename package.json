@@ -1,0 +1,22 @@
+{
+  "name": "chrome-async",
+  "version": "0.0.1",
+  "description": "An async wrapper for chrome.",
+  "author": "Pavel Kopytin <todizzy@gmail.com>",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vsDizzy/chrome-async"
+  },
+  "main": "dist/chrome-async.js",
+  "typings": "dist/chrome-async.d.ts",
+  "scripts": {
+    "start": "tsc -p . --sourceMap --declaration"
+  },
+  "dependencies": {
+    "@types/chrome": "^0.0.65"
+  },
+  "devDependencies": {
+    "typescript": "^2.8.3"
+  }
+}

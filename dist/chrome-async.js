@@ -8,7 +8,7 @@ function createProxy(targetObj) {
             : new Promise((resolve, reject) => {
                 argumentsList[argumentsList.length - 1] = (...args) => {
                     const error = chrome.runtime.lastError;
-                    return error ? reject(error) : resolve(...args);
+                    error ? reject.call(thisArg, error) : resolve.call(thisArg, ...args);
                 };
                 target.apply(thisArg, argumentsList);
             }),

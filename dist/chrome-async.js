@@ -1,4 +1,4 @@
-export function chromeAsync(fn) {
+export default function chromeAsync(fn) {
     let resolve;
     let reject;
     const res = new Promise((res, rej) => {
@@ -11,5 +11,4 @@ export function chromeAsync(fn) {
     });
     return res;
 }
-const r = chromeAsync((cb) => chrome.tabs.create({ url: 'about:blank' }, cb));
 //# sourceMappingURL=chrome-async.js.map

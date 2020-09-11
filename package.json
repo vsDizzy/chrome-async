@@ -1,6 +1,6 @@
 {
   "name": "chrome-async",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "An async wrapper for chrome.",
   "author": "Pavel Kopytin <todizzy@gmail.com>",
   "license": "ISC",

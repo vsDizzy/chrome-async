@@ -10,7 +10,7 @@ npm i chrome-async
 
 ## Usage
 
-Wrap `chrome` call with the `chromeAsync` function and pass `callback` argiment as the call parameter:
+Wrap `chrome` call with the `chromeAsync` function and pass `callback` argument as the call parameter:
 
 ```ts
 import chromeAsync from 'chrome-async';

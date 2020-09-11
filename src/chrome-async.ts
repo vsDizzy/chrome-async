@@ -1,19 +1,17 @@
-const chromeAsync = createProxy(chrome) as typeof chrome;
-export default chromeAsync;
-
-function createProxy(targetObj) {
-  const cache = [];
-  return new Proxy(targetObj, {
-    apply: (target, thisArg, argumentsList: any[]) =>
-      !argumentsList.length || argumentsList[argumentsList.length - 1]
-        ? target.apply(thisArg, argumentsList)
-        : new Promise((resolve, reject) => {
-          argumentsList[argumentsList.length - 1] = (...args) => {
-            const error = chrome.runtime.lastError;
-            error ? reject.call(thisArg, error) : resolve.call(thisArg, ...args);
-          };
-          target.apply(thisArg, argumentsList);
-        }),
-    get: (target, property, receiver) => cache[property] || (cache[property] = createProxy(target[property])),
+export function chromeAsync<T>(fn: (callback: (arg: unknown) => void) => void) {
+  let resolve: (value?: unknown) => void;
+  let reject: (reson?: any) => void;
+  const res = new Promise<T>((res, rej) => {
+    resolve = res;
+    reject = rej;
   });
+  fn((arg) => {
+    const error = chrome.runtime.lastError;
+    error ? reject(error) : resolve(arg);
+  });
+  return res;
 }
+
+const r = chromeAsync<chrome.tabs.Tab>((cb) =>
+  chrome.tabs.create({ url: 'about:blank' }, cb)
+);

@@ -5,23 +5,17 @@ An async wrapper for chrome. Useful when developing a [chrome extension](https:/
 ## Installing
 
 ```sh
-npm i -D chrome-async
-```
-
-or
-
-```sh
-yarn add -D chrome-async
+npm i chrome-async
 ```
 
 ## Usage
 
-Replace the callback parameter with `null` and function will return a `Promise` instead.
-
-## Example
+Wrap `chrome` call with the `chromeAsync` function and pass `callback` argiment as the call parameter:
 
 ```ts
 import chromeAsync from 'chrome-async';
 
-const tab: chrome.tabs.Tab = await chromeAsync.tabs.create({ url: 'about:blank', active: true }, null) as any;
+const tab = await chromeAsync<chrome.tabs.Tab>((callback) =>
+  chrome.tabs.create({ url: 'about:blank', active: true }, callback)
+);
 ```
